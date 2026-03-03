@@ -8,7 +8,6 @@ class IRunnable
 {
 public:
     virtual ~IRunnable();
-
     /*
       Executes an instance of the task as part of a bulk task launch.
 
@@ -23,6 +22,9 @@ public:
 
 class ITaskSystem
 {
+protected:
+    int num_threads;
+
 public:
     /*
       Instantiates a task system.
@@ -30,8 +32,8 @@ public:
        - num_threads: the maximum number of threads that the task system
          can use.
      */
-    ITaskSystem(int num_threads);
-    virtual ~ITaskSystem();
+    ITaskSystem(int num_threads) : num_threads(num_threads) {}
+    virtual ~ITaskSystem() {}
     virtual const char *name() = 0;
 
     /*
