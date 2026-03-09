@@ -40,7 +40,7 @@ void runBenchmark(ITaskSystem *system, IRunnable *task, int num_tasks, const std
 
 int main()
 {
-    int num_threads = std::thread::hardware_concurrency();
+    int num_threads = 4;//std::thread::hardware_concurrency();
     if (num_threads == 0)
         num_threads = 4;
 
