@@ -53,13 +53,11 @@ class TaskSystemParallelThreadPoolSpinning : public ITaskSystem
 private:
     std::vector<std::thread> workers;
     std::mutex mtx;
-
     IRunnable* runnable;
     int totalTasks;
     int nextTask;
+    int doneTasks;
     bool stop;
-
-    void workerLoop();
 
 public:
     TaskSystemParallelThreadPoolSpinning(int num_threads);
@@ -82,18 +80,15 @@ class TaskSystemParallelThreadPoolSleeping : public ITaskSystem
 private:
     std::vector<std::thread> workers;
     std::mutex mtx;
-    std::condition_variable cv;
-    std::condition_variable done_cv;
-
+    std::condition_variable workerCV;
+    std::condition_variable masterCV;
     IRunnable* runnable;
     int totalTasks;
     int nextTask;
-    int activeWorkers;
+    int doneTasks;
     bool hasWork;
     bool stop;
 
-    void workerLoop();
-    
 public:
     TaskSystemParallelThreadPoolSleeping(int num_threads);
     ~TaskSystemParallelThreadPoolSleeping();

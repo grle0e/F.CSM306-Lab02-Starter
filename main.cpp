@@ -40,14 +40,14 @@ void runBenchmark(ITaskSystem *system, IRunnable *task, int num_tasks, const std
 
 int main()
 {
-    int num_threads = 4;//std::thread::hardware_concurrency();
+    int num_threads = std::thread::hardware_concurrency();
     if (num_threads == 0)
         num_threads = 4;
 
     // Ажлын тоо их, нэг ажлын хүндрэл бага байх тусам
     // Thread Pool-ийн давуу тал тодорхой харагдана.
-    int num_tasks = 10000;
-    int workload_intensity = 5000;
+    int num_tasks = 5000;
+    int workload_intensity = 200;
 
     std::cout << "========================================" << std::endl;
     std::cout << "Task System Benchmark" << std::endl;
